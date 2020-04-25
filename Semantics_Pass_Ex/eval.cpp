@@ -96,6 +96,12 @@ Rel compute_tv_value(Tree *t) {
   }
 }
 
+Rel flip(Rel kissed_fliped) {
+  for(int i=0; i<kissed_fliped.tuples.size(); i++) {
+    reverse(kissed_fliped.tuples[i].begin(), kissed_fliped.tuples[i].end());
+  }
+  return kissed_fliped;
+}
 // tv_pass --> [was],[w]
 // see assign description
 // if its tree for 'was kissed' should return a relation
@@ -103,8 +109,14 @@ Rel compute_tv_value(Tree *t) {
 // in each of its contained tuples
 Rel compute_tv_pass_value(Tree *t) {
   Rel r(2);
-  // CHANGE HERE: this code will compile but do nothing meaningful
-  return r;
+  if(t->dtrs[1]->mother.cat == "kissed") {
+    Rel kissed_fliped = flip(kissed);
+    return kissed_fliped;
+  }
+  else {
+    sem_error(t);
+    return r;
+  }
 }
 
 
@@ -124,7 +136,6 @@ Rel compute_vp_value(Tree *t) {
     r_unary = reduce(r_binary,1,o);
     return r_unary;
   } // end vp --> tv,np
-
   else if(match(t,Rule("vp --> [is],[a],n"))) {
     r_unary = compute_n_value(t->dtrs[2]);
     return r_unary;
@@ -135,6 +146,18 @@ Rel compute_vp_value(Tree *t) {
   }
   // CHANGE HERE: add a further case for 
   //vp --> tv_pass,[by],np
+  else if(match(t, Rule("vp --> tv_pass,[by],np"))
+          && match(t->dtrs[2], Rule("np --> name"))) {
+    Tree *tv_pass = t->dtrs[0];
+    Rel r_binary(2);
+    r_binary = compute_tv_pass_value(tv_pass);
+    
+    Tree *np = t->dtrs[2];
+    Thing o;
+    o = compute_np_value(np);
+    r_unary = reduce(r_binary,1,o);
+    return r_unary;
+  }
   else {
     sem_error(t);
     return r_unary;
