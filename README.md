@@ -2,4 +2,5 @@
 ## Regular Languages
 ### The Pumping Lemma
 - Theorem 1  
-If $$L$$
+If
+\partial f_{\mbox{\tiny 极大值}}
