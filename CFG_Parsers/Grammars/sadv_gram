@@ -1,0 +1,8 @@
+s --> np,vp
+s --> sadv,s
+sadv --> [maybe]
+np --> [john]
+vp --> iv
+iv --> [walks]
+
+initial(s)

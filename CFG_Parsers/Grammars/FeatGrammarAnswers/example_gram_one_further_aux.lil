@@ -1,0 +1,289 @@
+%<dec>
+person <- [bot].
+first <- [person].
+second <- [person].
+third <- [person].
+
+number <- [bot].
+sing <- [number].
+pl <- [number].
+
+tense <- [bot].
+pres <- [tense].
+praet <- [tense].
+
+nontensed <- [bot].
+prog <- [nontensed].
+base <- [nontensed].
+ppart <- [nontensed].
+
+case <- [bot].
+nom <- [case].
+acc <- [case].
+
+agr <-  [bot] + [pers\person, num\number].
+vfin <- [agr] + [tns\tense].
+vnonfin <-  [bot] + [vform\nontensed].
+nflex <- [agr] + [cse\case].
+%</dec>
+
+%<lil>
+initial(
+  cat("s",X)
+).
+%</lil>
+
+%<lil>
+rule(
+     cat("s",Y),
+     [cat("np",(cse\nom & num\N & pers\P)),
+      cat("vp",(Y & num\N & pers\P))]
+     ).
+%</lil>
+
+
+%<lil>
+rule(
+     cat("np",X),
+     [cat("det", X),
+      cat("n", X)]
+     ).
+%</lil>
+
+%<lil>
+lex_rule(
+     cat("det",num\sing),
+     "a"
+     ).
+%</lil>
+
+%<lil>
+lex_rule(
+     cat("det",num\pl),
+     "many"
+     ).
+%</lil>
+
+%<lil>
+lex_rule(
+     cat("det",num\X),
+     "the"
+     ).
+%</lil>
+
+
+%<lil>
+lex_rule(
+	 cat("n",(num\sing & pers\third)),
+	 "man"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("n",(num\pl & pers\third)),
+	 "men"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("n",(pers\third)),
+	 "fish"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("np",(num\sing & pers\third)),
+	 "john"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("np",(cse\nom & num\sing & pers\third)),
+	 "he"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("np",(cse\acc & num\sing & pers\third)),
+	 "her"
+	 ).
+%</lil>
+
+
+%<lil>
+lex_rule(
+	 cat("vp",(tns\pres & num\sing & pers\third)),
+	 "walks"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("vp",(tns\pres & num\pl & pers\third)),
+	 "walk"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("vp",(tns\praet)),
+	 "walked"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("vp",(vform\prog)),
+	 "walking"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("vp",(vform\base)),
+	 "walk"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("vp",(vform\ppart)),
+	 "walked"
+	 ).
+%</lil>
+
+%<lil>
+rule(
+     cat("vp",X),
+     [cat("tv",X),
+      cat("np",(cse\acc))]
+     ).
+%</lil>
+
+
+%<lil>
+lex_rule(
+	 cat("tv",(tns\pres & num\sing & pers\third)),
+	 "attacks"
+	 ).
+%</lil>
+
+
+%<lil>
+lex_rule(
+	 cat("tv",(tns\pres & num\pl & pers\third)),
+	 "attack"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("tv",(tns\praet)),
+	 "attacked"
+	 ).
+%</lil>
+
+
+%<lil>
+lex_rule(
+	 cat("tv",(vform\prog)),
+	 "attacking"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("tv",(vform\base)),
+	 "attack"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("tv",(vform\ppart)),
+	 "attacked"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("prog-aux",(tns\pres & num\sing & pers\third)),
+	 "is"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("prog-aux",(tns\pres & num\pl & pers\third)),
+	 "are"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("prog-aux",(tns\praet & num\sing & pers\third)),
+	 "was"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("prog-aux",(tns\praet & num\pl & pers\third)),
+	 "were"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("mod-aux",(tns\pres)),
+	 "could"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("perf-aux",(tns\pres & num\sing & pers\third)),
+	 "has"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("perf-aux",(tns\pres & num\pl)),
+	 "have"
+	 ).
+%</lil>
+
+%<lil>
+rule(
+   cat("vp",X),
+      [cat("prog-aux",X),
+       cat("vp",vform\prog)]
+   ).
+%</lil>
+
+%<lil>
+rule(
+   cat("vp",X),
+      [cat("mod-aux",X),
+       cat("vp",vform\base)]
+   ).
+%</lil>
+
+%<lil>
+rule(
+   cat("vp",X),
+      [cat("perf-aux",X),
+       cat("vp",vform\ppart)]
+   ).
+%</lil>
+
+
+
+
+

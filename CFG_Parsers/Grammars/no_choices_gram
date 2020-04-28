@@ -1,0 +1,6 @@
+s --> np,vp
+np --> [john]
+vp --> iv
+iv --> [walks]
+
+initial(s)

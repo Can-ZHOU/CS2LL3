@@ -1,0 +1,13 @@
+vp --> v1
+vp --> np,v2
+vp --> np,np,v3
+vp --> np,pp,v4
+v1 --> [schlaeft]
+v2 --> [schlaegt]
+v3 --> [gibt]
+v4 --> [stellt]
+np --> [er]
+np --> [ihn]
+pp --> p,np
+p --> [auf]
+initial(vp)

@@ -1,0 +1,30 @@
+%np --> det,n,relpro,???
+np --> det,n
+np --> [I]
+np --> [you]
+
+s --> np,vp
+
+vp --> tv,np
+vp --> dtv,np,[to],np
+vp --> pv,s
+
+tv --> [bought]
+tv --> [described]
+tv --> [depicted]
+
+dtv --> [gave]
+
+det --> [the]
+
+pv --> [believed]
+pv --> [claimed]
+
+n --> [book]
+n --> [model]
+n --> [ship]
+
+relpro --> [which]
+
+initial(s)
+%initial(np)

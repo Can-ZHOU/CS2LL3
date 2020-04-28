@@ -1,0 +1,26 @@
+person <- [bot].
+first <- [person].
+second <- [person].
+third <- [person].
+
+number <- [bot].
+sing <- [number].
+pl <- [number].
+
+tense <- [bot].
+pres <- [tense].
+praet <- [tense].
+
+nontensed <- [bot].
+prog <- [nontensed].
+base <- [nontensed].
+ppart <- [nontensed].
+
+case <- [bot].
+nom <- [case].
+acc <- [case].
+
+agr <-  [bot] + [pers\person, num\number].
+vfin <- [agr] + [tns\tense].
+vnonfin <-  [bot] + [vform\nontensed].
+nflex <- [agr] + [cse\case].

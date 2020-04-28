@@ -1,0 +1,21 @@
+%noun phrase rules
+%kind of X-bar style
+%n0 is for words or compound words
+%n1 is for adjectives added to n0
+%np is effectively bar level 2
+np --> pronoun
+pronoun --> [I]
+np --> det,n1
+n0 --> n_lex
+n0 --> n_lex,n0
+n1 --> n0
+n1 --> adj,n1
+n_lex --> [flight]
+n_lex --> [morning]
+det --> [a]
+det --> [the]
+adj --> [long]
+adj --> [boring]
+
+
+initial(np)

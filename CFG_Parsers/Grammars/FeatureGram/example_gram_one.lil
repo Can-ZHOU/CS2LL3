@@ -1,0 +1,148 @@
+%<dec>
+person <- [bot].
+first <- [person].
+second <- [person].
+third <- [person].
+
+number <- [bot].
+sing <- [number].
+pl <- [number].
+
+tense <- [bot].
+pres <- [tense].
+praet <- [tense].
+
+nontensed <- [bot].
+prog <- [nontensed].
+base <- [nontensed].
+ppart <- [nontensed].
+
+case <- [bot].
+nom <- [case].
+acc <- [case].
+
+agr <-  [bot] + [pers\person, num\number].
+vfin <- [agr] + [tns\tense].
+vnonfin <-  [bot] + [vform\nontensed].
+nflex <- [agr] + [cse\case].
+%</dec>
+
+%<lil>
+initial(
+  cat("s",X)
+).
+%</lil>
+
+%<lil>
+rule(
+     cat("s",Y),
+     [cat("np",(num\N & pers\P)),
+      cat("vp",(Y & num\N & pers\P))]
+     ).
+%</lil>
+
+
+%<lil>
+rule(
+     cat("np",X),
+     [cat("det", X),
+      cat("n", X)]
+     ).
+%</lil>
+
+%<lil>
+lex_rule(
+     cat("det",num\sing),
+     "a"
+     ).
+%</lil>
+
+%<lil>
+lex_rule(
+     cat("det",num\pl),
+     "many"
+     ).
+%</lil>
+
+%<lil>
+lex_rule(
+     cat("det",num\X),
+     "the"
+     ).
+%</lil>
+
+
+%<lil>
+lex_rule(
+	 cat("n",(num\sing & pers\third)),
+	 "man"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("n",(num\pl & pers\third)),
+	 "men"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("n",(pers\third)),
+	 "fish"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("np",(num\sing & pers\third)),
+	 "john"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("np",(cse\nom & num\sing & pers\third)),
+	 "he"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("np",(cse\acc & num\sing & pers\third)),
+	 "her"
+	 ).
+%</lil>
+
+
+%<lil>
+lex_rule(
+	 cat("vp",(vform\prog)),
+	 "walking"
+	 ).
+%</lil>
+
+
+%<lil>
+lex_rule(
+	 cat("prog-aux",(tns\pres & num\sing & pers\third)),
+	 "is"
+	 ).
+%</lil>
+
+%<lil>
+lex_rule(
+	 cat("prog-aux",(tns\pres & num\pl & pers\third)),
+	 "are"
+	 ).
+%</lil>
+
+%<lil>
+rule(
+   cat("vp",X),
+      [cat("prog-aux",X),
+       cat("vp",vform\prog)]
+   ).
+%</lil>
+
+

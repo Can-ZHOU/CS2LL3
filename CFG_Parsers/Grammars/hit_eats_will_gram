@@ -1,0 +1,16 @@
+/* simple grammar */
+
+s --> np,vp
+np --> det,n
+det --> [the]
+n --> [man]
+n --> [dog]
+n --> [will]
+aux --> [will]
+vp --> aux,vp
+vp --> tv,np
+tv --> [hit]
+tv --> [eats]
+vp --> [eats]
+
+initial(s)

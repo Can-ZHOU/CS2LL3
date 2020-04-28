@@ -1,0 +1,9 @@
+np --> [the],n,[which],np,tv
+np --> [I]
+n --> [book]
+n --> [model]
+n --> [ship]
+tv --> [bought]
+tv --> [described]
+tv --> [depicted]
+initial(np)

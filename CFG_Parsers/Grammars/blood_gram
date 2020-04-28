@@ -1,0 +1,13 @@
+n --> n,n
+n --> [temperature]
+n --> [emergency]
+n --> [blood]
+n --> [hospital]
+n --> [funding]
+n --> [alarm]
+np --> [the],n
+s --> np,vp
+vp --> [suggests],s
+vp --> [causes],np
+initial(s)
+%initial(np)

@@ -1,0 +1,10 @@
+vp --> v,np
+vp --> v,np,pp
+np --> det,n
+np --> det,n,pp
+pp --> [with],np
+v --> [saw]
+n --> [man]
+n --> [binoculars]
+det --> [the]
+initial(vp)
