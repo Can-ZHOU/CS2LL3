@@ -1,0 +1,9 @@
+initial(vp1)
+vp1 --> v1,np,vp2
+v1 --> [let]
+v1 --> [help]
+vp2 --> v2,np
+v2 --> [eat]
+v2 --> [help]
+np --> [her]
+np --> [it]

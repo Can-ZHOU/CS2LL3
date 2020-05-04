@@ -1,0 +1,151 @@
+[0] I will explain a bit about what a particular 'eraser' program does
+
+ plan is to code something up to do the same
+
+[1] the code in
+
+  string_example.cpp
+
+ illustrates strings, chars and reading from input. Compiled and executed it reads a string and puts back its characters separted by spaces:
+
+ g++ string_example.cpp -o myprog
+ ./myprog 
+ enter a word
+ aviary
+ a v i a r y 
+
+[2]  in some file implement a function
+
+ bool is_vowel(char c)
+
+put a main() into it which tests it by reading a word
+and then printing back its chars with V following the vowels eg:
+
+ enter a word
+potato
+p :
+o :V
+t :
+a :V
+t :
+o :V
+
+NB: for ease just assume input is lower case
+
+NB: this illustrates the general 'declare before use' aspect of functions
+
+NB: the pre-compiled program 
+
+ part_one_prog
+
+does this.
+
+The file
+
+ part_one_start.cpp
+
+is a start towards the answer. The file 
+
+ part_one.cpp
+
+is a complete answer; it was initally unreadable, but it now is readable.
+
+
+[3] continue this by adding a function
+
+ bool is_cons(char c)
+
+and update the testing so that it 'labels' consonants as well eg
+
+enter a word
+potato
+p :C
+o :V
+t :C
+a :V
+t :C
+o :V
+
+NB: in a terminal typing 'man ascii' shows ascii codes
+    in emacs doing 'esc-x man ascii' does same
+
+NB: the precompiled program
+
+  part_two_prog
+
+shows intended behaviour
+
+NB: the source code file
+
+  part_two.cpp
+
+is a complete answer (it was initially  unreadable and is now readable)
+
+NB: this has 2 functions declared before use, and then both implemented later in the file
+
+
+[4] The canonical thing would be to separate into 2 files, as is done in 
+
+ vowel_cons_functions.cpp    : contains is_vowel() is_cons()
+ vowel_cons_just_tester.cpp  : contains main()
+
+ The canonical thing is then to first do what is called 'separate compilation' on
+ each file
+ 
+  g++ -c vowel_cons_functions.cpp 
+  g++ -c vowel_cons_just_tester.cpp
+
+ which makes versions with '.o' suffixes, and then second do what is called 'linking'
+
+  g++ vowel_cons_functions.o vowel_cons_just_tester.o -o myprog
+
+ You can just type 
+
+  g++ vowel_cons_functions.cpp vowel_cons_just_tester.cpp -o myprog
+
+ and those 3 separate steps are done 'out of sight'
+ 
+[5] this has introduced most of the ingredients need to make a program
+which does what the 'eraser' program did. This program can 'erase'
+either vowels or consonants from a particular sentence. The particular sentence was actually read from the file
+
+ afile_from_bodmer
+
+(the 'bodmer' business relates to book by a guy called Bodmer from which I took the example: you might want to read 'about_bodmer' which will tell you about the book)
+
+I'll be setting the creation of source code replicating 'eraser' as an
+assignment. Please read the following before diving into this
+
+ [] the task involves additionally 
+
+      opening a file
+      reading a whole line with with getline
+
+ and your code should build upon 
+
+    eraser_start.cpp
+
+ which includes lines of source code to do those two things
+
+ [] you will need to have copied the files from the
+
+  /shared/teaching/CSLL/2CSLL3/Bodmer
+
+  into some directory of your own
+
+ [] you code should be some kind of modification of eraser_start.cpp and
+    when supposing your code is eraser_mine.cpp' then your program should be
+    producible by the compilation
+
+  g++ eraser_mine.cpp vowel_cons_functions.cpp -o myprog
+
+ [] note you do *not* need to change vowel_cons_functions.cpp which provides the is_vowel(..) and is_cons(..)
+
+ [] the traversal of a string and reaction to its particular characters was
+    already seen in
+
+     string_example.cpp, part_(one/two).cpp, vowel_cons_just_tester.cpp
+
+
+[6] you might want to read 'about_bodmer' which will tell you about the book from which I took the example
+
