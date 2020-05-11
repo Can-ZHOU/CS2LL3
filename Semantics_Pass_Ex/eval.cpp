@@ -96,20 +96,17 @@ Rel compute_tv_value(Tree *t) {
   }
 }
 
-Rel flip(Rel kissed_fliped) {
-  for(int i=0; i<kissed_fliped.tuples.size(); i++) {
-    reverse(kissed_fliped.tuples[i].begin(), kissed_fliped.tuples[i].end());
-  }
-  return kissed_fliped;
-}
 // tv_pass --> [was],[w]
 // see assign description
 // if its tree for 'was kissed' should return a relation
 // derived from the 'kissed' relation by flipping the order
 // in each of its contained tuples
+// see the flip funciton's detail below
+Rel flip(Rel kissed_fliped);
 Rel compute_tv_pass_value(Tree *t) {
   Rel r(2);
-  if(t->dtrs[1]->mother.cat == "kissed") {
+  if(t->dtrs[0]->mother.cat == "was" && t->dtrs[1]->mother.cat == "kissed") {
+    // call flip function to return a relation which is derived from the kissed relation by inverting the order in all the contained tuples
     Rel kissed_fliped = flip(kissed);
     return kissed_fliped;
   }
@@ -117,6 +114,14 @@ Rel compute_tv_pass_value(Tree *t) {
     sem_error(t);
     return r;
   }
+}
+// compute_tv_pass_value's helper function, used to relation-to-relation conversion
+Rel flip(Rel kissed_fliped) {
+  for(int i=0; i<kissed_fliped.tuples.size(); i++) {
+    // using reverse for relation-to-relation conversion
+    reverse(kissed_fliped.tuples[i].begin(), kissed_fliped.tuples[i].end());
+  }
+  return kissed_fliped;
 }
 
 
